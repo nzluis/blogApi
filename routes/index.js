@@ -12,14 +12,16 @@ const userController = require('../controller/userController')
 
 router.get('/', indexController.post_list_get)
 
-// router.get('/post/:id', indexController.post_detail_get)
-// router.post('/post/:id', indexController.post_detail_post)
+router.get('/post/:postId', indexController.post_detail_get)
+
+router.get('/post/:postId/comments', indexController.comments_list_get)
+router.post('/post/:postId/newComment', indexController.comment_create_post)
 
 // router.get('/user/login', userController.login_get)
 router.post('/user/login', userController.login_post)
 
 router.get('/post/newPost', passport.authenticate('jwt', { session: false }), userController.create_new_get)
-// router.post('/post/newPost', passport.authenticate('jwt', { session: false }), userController.create_new_post)
+router.post('/post/newPost', passport.authenticate('jwt', { session: false }), userController.create_new_post)
 
 module.exports = router
 

@@ -1,6 +1,9 @@
 const bcrypt = require('bcryptjs')
 const utils = require('../config/utils')
 const User = require('../models/user')
+const Post = require('../models/post')
+const { check, body, validationResult } = require('express-validator');
+
 
 module.exports.login_post = (req, res, next) => {
 
@@ -29,3 +32,30 @@ module.exports.login_post = (req, res, next) => {
 module.exports.create_new_get = (req, res, next) => {
     res.status(200).json({ success: true, msg: "You are successfully authenticated to this route!"});
 }
+
+module.exports.create_new_post = [
+    body('title', 'Pleas insert a title').trim().isLength({min:1}).escape(),
+    body('text', 'Pleas insert a text').trim().isLength({min:1}).escape(),
+    (req, res, next) => {
+        const post = new Post({
+            title: req.body.title,
+            author: '64158f9d150124daa34a0572',
+            text: req.body.text,
+            status: req.body.status, 
+        })
+        const errors = validationResult(req)
+        if(!errors.isEmpty()){
+            res.json({errors: errors.array()})
+        } else {
+            post.save()
+            .then(() => {
+                res.json({ message: `Post '${post.title}' successfully saved` })
+            })
+            .catch(err => {
+                res.json({ message: 'Post Failed', err})
+            })
+        }
+
+    
+    }
+]
