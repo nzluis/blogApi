@@ -8,7 +8,6 @@ const PostSchema = new Schema({
     text: {type: String, required: true},
     status: {type: String, enum: ['Show', 'Hide'],default: 'Hide', required: true}, 
     timestamp: {type: Date, default: Date.now, required: true},
-    comment: {type: Schema.Types.ObjectId, ref: 'Comment'}
 })
 
 PostSchema.virtual('url').get(function(){

@@ -3,6 +3,7 @@ const Schema = mongoose.Schema
 
 const CommentSchema = new Schema ({
     email: {type: String, required: true},
+    blog_id: {type: Schema.Types.ObjectId, ref: 'Blog',required: true},
     text: {type: String, required: true},
     timestamp: {type: Date, default: Date.now, required: true},
     
