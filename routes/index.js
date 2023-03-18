@@ -1,11 +1,5 @@
 const router = require('express').Router()
-const utils = require('../config/utils');
 const passport = require('passport');
-const bcrypt = require('bcryptjs')
-
-const User = require('../models/user')
-const Post = require('../models/post')
-const Comment = require('../models/comment')
 
 const indexController = require('../controller/indexController')
 const userController = require('../controller/userController')
