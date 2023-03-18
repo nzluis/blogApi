@@ -14,8 +14,8 @@ router.post('/post/:postId/newComment', indexController.comment_create_post)
 // router.get('/user/login', userController.login_get)
 router.post('/user/login', userController.login_post)
 
-router.get('/post/newPost', passport.authenticate('jwt', { session: false }), userController.create_new_get)
-router.post('/post/newPost', passport.authenticate('jwt', { session: false }), userController.create_new_post)
+router.get('/user/newPost', passport.authenticate('jwt', { session: false }), userController.create_new_get)
+router.post('/user/newPost', passport.authenticate('jwt', { session: false }), userController.create_new_post)
 
 module.exports = router
 
