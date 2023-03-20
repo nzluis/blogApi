@@ -4,6 +4,7 @@ require('dotenv').config()
 const passport = require('passport');
 var debug = require('debug')('blogApi:server');
 var http = require('http');
+const path = require('path')
 
 const indexRouter = require('./routes/index')
 
@@ -17,7 +18,7 @@ app.use(passport.initialize());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter)
 
@@ -25,8 +26,10 @@ app.use('/', indexRouter)
 
 // })
 
+port = 5000
+
 var server = http.createServer(app);
-server.listen(3000);
+server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
 
