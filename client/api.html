@@ -31,8 +31,8 @@
                 blogs = blogs.map(function(blog, index){
                     return(
                         <li key={index}>
-                            <span className="name">{blog.obj.title}</span>
-                            <span className="rank">{blog.author}</span>
+                            <span className="post">{blog.title}</span>
+                            <span className="author">{blog.author.username}</span>
                         </li>
                     );
                 });
@@ -45,31 +45,24 @@
                     </div>
                 );
             },
+
             handleSubmit: function(e){
                 e.preventDefault();
-
-                fetch('http://localhost:5000/', {
-                    mode:"no-cors",
-                    // method: "GET",
-                    // headers: {
-                    //     "Content-Type": "application/json"
-                    // },
-                    // "Access-Control-Allow-Origin": "*"    
-                }).then(function(data){
-                    console.log(data)
-                    return data.json()
-                }).then( json => {
-                    console.log(json);
-                    this.setState({
-                        blogs: json
-                    });
-                });
-
+           
+                fetch('http://localhost:5000/')
+                .then(response => { 
+                    console.log(response)
+                    return response.json()
+                })
+                .then(response => {
+                    console.log(response)
+                    this.setState ({
+                        blogs: response.posts
+                    })
+                })
             }
         });
         ReactDOM.render(<Blogs />, document.getElementById('blogs'));
         </script>
-
-
     </body>
 </html>
