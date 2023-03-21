@@ -1,23 +1,33 @@
-const router = require('express').Router()
-const passport = require('passport');
+const router = require("express").Router();
+const passport = require("passport");
+// const cors = require('cors')
 
-const indexController = require('../controller/indexController')
-const userController = require('../controller/userController')
+const indexController = require("../controller/indexController");
+const userController = require("../controller/userController");
 
-router.get('/', indexController.post_list_get)
+// router.options('/', cors())
+router.get("/", indexController.post_list_get);
 
-router.get('/post/:postId', indexController.post_detail_get)
+router.get("/post/:postId", indexController.post_detail_get);
 
-router.get('/post/:postId/comments', indexController.comments_list_get)
-router.post('/post/:postId/newComment', indexController.comment_create_post)
+router.get("/post/:postId/comments", indexController.comments_list_get);
+router.post("/post/:postId/newComment", indexController.comment_create_post);
 
 // router.get('/user/login', userController.login_get)
-router.post('/user/login', userController.login_post)
+router.post("/user/login", userController.login_post);
 
-router.get('/user/newPost', passport.authenticate('jwt', { session: false }), userController.create_new_get)
-router.post('/user/newPost', passport.authenticate('jwt', { session: false }), userController.create_new_post)
+router.get(
+  "/user/newPost",
+  passport.authenticate("jwt", { session: false }),
+  userController.create_new_get
+);
+router.post(
+  "/user/newPost",
+  passport.authenticate("jwt", { session: false }),
+  userController.create_new_post
+);
 
-module.exports = router
+module.exports = router;
 
 // router.post('/register', function(req, res, next){
 
